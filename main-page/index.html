@@ -3,107 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Red Ball Experience</title>
+    <title>Ultimate Red Ball Experience v3</title>
     <style>
-        /* --- Keyframes for Animations (Unchanged) --- */
-        @keyframes drift { /* ... */ 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        @keyframes fadeInSlide { /* ... */ from { opacity: 0; transform: translate(-50%, -30px); } to { opacity: 1; transform: translate(-50%, 0); } }
+        /* CSS remains largely the same as the previous version */
+        /* Keyframes, Base, Background, Overlay, Text Clip... */
+        @keyframes drift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}@keyframes fadeInSlide{from{opacity:0;transform:translate(-50%,-30px)}to{opacity:1;transform:translate(-50%,0)}}
+        body{background-color:#1a1a1a;height:100vh;margin:0;overflow-x:hidden;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;position:relative}body::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background-image:url('https://raw.githubusercontent.com/d3add3v/RedBall/main/lz10oedx6feb1.png');background-repeat:repeat;background-size:150px;opacity:.15;z-index:-1;animation:drift 90s linear infinite}.overlay-text{position:absolute;top:20px;left:50%;transform:translateX(-50%);width:90%;max-width:650px;background-color:rgba(0,0,0,.8);color:#fff;padding:20px 30px;border-radius:12px;text-align:center;box-shadow:0 6px 20px rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.1);opacity:0;animation:fadeInSlide .8s .5s ease-out forwards}.overlay-text h1{margin:0 0 15px;font-size:3em;font-weight:700;line-height:1.1;background-image:url('https://raw.githubusercontent.com/d3add3v/RedBall/main/lz10oedx6feb1.png');background-size:70px;background-repeat:repeat;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.1);text-stroke:1px rgba(255,255,255,.1)}.overlay-text p{margin:0 0 15px;font-size:.95em;color:#ddd}
+        .controls{margin-top:15px;padding-top:15px;border-top:1px solid rgba(255,255,255,.1)}
+        .controls button{background-color:#4CAF50;border:none;color:#fff;padding:10px 18px;font-size:14px;border-radius:6px;cursor:pointer;margin:5px 4px;transition:all .2s ease;box-shadow:0 2px 4px rgba(0,0,0,.2);vertical-align:middle}
+        .controls button#stopButton{background-color:#f44336}.controls button#triggerNowButton{background-color:#007bff}.controls button#creditsButton{background-color:#6c757d}
+        .controls button:hover:not(:disabled){opacity:.9;transform:translateY(-1px)}.controls button:disabled{background-color:#555;cursor:not-allowed;opacity:.6;transform:translateY(0);box-shadow:none}
+        .volume-control{margin-top:0;display:inline-block;vertical-align:middle;margin-left:8px}
+        .volume-control label{margin-right:8px;font-size:.9em;color:#ccc}
+        .volume-control input[type=range]{width:90px;height:5px;cursor:pointer;vertical-align:middle;background:#555;border-radius:3px;appearance:none;-webkit-appearance:none}
+        .volume-control input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:15px;height:15px;background:#4CAF50;border-radius:50%;cursor:pointer}
+        .volume-control input[type=range]::-moz-range-thumb{width:15px;height:15px;background:#4CAF50;border-radius:50%;cursor:pointer;border:none}
+        .delay-control{margin-top:15px;padding-top:10px;border-top:1px solid rgba(255,255,255,.1)}
+        .delay-control .input-group{display:inline-block;margin:0 8px}
+        .delay-control label{margin-right:5px;font-size:.9em;color:#ccc}
+        .delay-control input[type=number]{width:45px;padding:5px 8px;background-color:#333;border:1px solid #555;color:#fff;border-radius:4px;font-size:.9em;-moz-appearance:textfield}
+        .delay-control input[type=number]::-webkit-inner-spin-button,.delay-control input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+        .barrage-control{margin-top:15px;padding-top:10px;border-top:1px solid rgba(255,255,255,.1)}
+        .barrage-control fieldset{border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:5px 15px 10px;display:inline-block; /* Removed disabled styling target */ }
+        .barrage-control legend{font-size:.9em;color:#ccc;padding:0 5px;margin-left:10px}
+        .barrage-control label{margin:0 10px 0 3px;font-size:.9em;color:#eee;cursor:pointer;vertical-align:middle}
+        .barrage-control input[type="radio"]{vertical-align:middle;cursor:pointer;accent-color:#e44d26}
+        /* Removed disabled state styling for fieldset elements */
+        /* .barrage-control fieldset:disabled label{cursor:not-allowed;color:#888} */
+        /* .barrage-control fieldset:disabled input[type="radio"]{cursor:not-allowed} */
 
-        /* --- Base and Background Styling (Unchanged) --- */
-        body { /* ... */ background-color: #1a1a1a; height: 100vh; margin: 0; overflow-x: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; position: relative; }
-        body::before { /* ... */ content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('https://raw.githubusercontent.com/d3add3v/RedBall/main/lz10oedx6feb1.png'); background-repeat: repeat; background-size: 150px; opacity: 0.15; z-index: -1; animation: drift 90s linear infinite; }
-
-        /* --- Overlay Box Styling & Animation (Unchanged) --- */
-        .overlay-text { /* ... */ position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 600px; background-color: rgba(0, 0, 0, 0.8); color: white; padding: 20px 30px; border-radius: 12px; text-align: center; box-shadow: 0 6px 20px rgba(0,0,0,0.6); border: 1px solid rgba(255, 255, 255, 0.1); opacity: 0; animation: fadeInSlide 0.8s 0.5s ease-out forwards; }
-
-        /* --- Clipped Text Styling (Unchanged) --- */
-        .overlay-text h1 { /* ... */ margin: 0 0 15px 0; font-size: 3em; font-weight: 700; line-height: 1.1; background-image: url('https://raw.githubusercontent.com/d3add3v/RedBall/main/lz10oedx6feb1.png'); background-size: 70px; background-repeat: repeat; -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1); text-stroke: 1px rgba(255, 255, 255, 0.1); }
-        .overlay-text p { /* ... */ margin: 0 0 15px 0; font-size: 0.95em; color: #ddd; }
-
-        /* --- Controls Styling --- */
-        .controls { /* ... */ margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.1); }
-        .controls button { /* ... */ background-color: #4CAF50; border: none; color: white; padding: 10px 18px; font-size: 14px; border-radius: 6px; cursor: pointer; margin: 5px 6px; transition: all 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-        .controls button#stopButton { background-color: #f44336; }
-        .controls button#triggerNowButton { background-color: #007bff; }
-        .controls button#creditsButton { background-color: #6c757d; } /* Grey for credits */
-        .controls button:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
-        .controls button:disabled { background-color: #555; cursor: not-allowed; opacity: 0.6; transform: translateY(0); box-shadow: none;}
-
-        /* Volume Slider Styling (Unchanged) */
-        .volume-control { /* ... */ margin-top: 15px; display: inline-block; vertical-align: middle; margin-left: 10px; }
-        .volume-control label { /* ... */ margin-right: 10px; font-size: 0.9em; color: #ccc; }
-        .volume-control input[type="range"] { /* ... */ width: 100px; height: 5px; cursor: pointer; vertical-align: middle; background: #555; border-radius: 3px; appearance: none; -webkit-appearance: none; }
-        .volume-control input[type="range"]::-webkit-slider-thumb { /* ... */ -webkit-appearance: none; appearance: none; width: 15px; height: 15px; background: #4CAF50; border-radius: 50%; cursor: pointer; }
-        .volume-control input[type="range"]::-moz-range-thumb { /* ... */ width: 15px; height: 15px; background: #4CAF50; border-radius: 50%; cursor: pointer; border: none; }
-
-        /* --- Delay Control Styling (NEW) --- */
-        .delay-control { margin-top: 15px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.1); }
-        .delay-control .input-group { display: inline-block; margin: 0 10px; }
-        .delay-control label { margin-right: 5px; font-size: 0.9em; color: #ccc; }
-        .delay-control input[type="number"] {
-            width: 50px; /* Adjust width */
-            padding: 5px 8px;
-            background-color: #333;
-            border: 1px solid #555;
-            color: white;
-            border-radius: 4px;
-            font-size: 0.9em;
-            appearance: textfield; /* Remove number spinners in some browsers */
-             -moz-appearance: textfield;
-        }
-
-        /* --- Credits Modal Styling (NEW) --- */
-        .modal-backdrop {
-             display: none; /* Hidden by default */
-             position: fixed;
-             top: 0; left: 0; right: 0; bottom: 0;
-             background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black */
-             z-index: 999; /* Below modal, above everything else */
-             backdrop-filter: blur(3px); /* Optional blur */
-         }
-        #creditsModal {
-            display: none; /* Hidden by default */
-            position: fixed;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80%;
-            max-width: 500px;
-            background-color: #333; /* Dark background */
-            color: #eee;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.7);
-            z-index: 1000; /* Above backdrop */
-            border: 1px solid #555;
-        }
-         #creditsModal h2 { margin-top: 0; color: white; }
-         #creditsModal p { line-height: 1.6; margin-bottom: 10px; }
-         #creditsModal a { color: #8ab4f8; text-decoration: none; } /* Light blue links */
-         #creditsModal a:hover { text-decoration: underline; }
-         #creditsModal .close-button {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #aaa;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0 5px;
-        }
-         #creditsModal .close-button:hover { color: white; }
-
-        /* Class to show the modal and backdrop */
-        body.modal-open .modal-backdrop,
-        body.modal-open #creditsModal {
-            display: block;
-        }
+        /* --- Credits Modal (Unchanged) --- */
+        .modal-backdrop{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background-color:rgba(0,0,0,.6);z-index:999;backdrop-filter:blur(3px)}#creditsModal{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:80%;max-width:500px;background-color:#333;color:#eee;padding:30px;border-radius:10px;box-shadow:0 8px 25px rgba(0,0,0,.7);z-index:1000;border:1px solid #555}#creditsModal h2{margin-top:0;color:#fff}#creditsModal p{line-height:1.6;margin-bottom:10px}#creditsModal a{color:#8ab4f8;text-decoration:none}#creditsModal a:hover{text-decoration:underline}#creditsModal .close-button{position:absolute;top:10px;right:15px;font-size:1.8em;font-weight:700;color:#aaa;background:0 0;border:none;cursor:pointer;padding:0 5px}#creditsModal .close-button:hover{color:#fff}body.modal-open .modal-backdrop,body.modal-open #creditsModal{display:block}
 
         /* --- Popup Fade CSS (Unchanged) --- */
-        .popup-fade-wrapper { /* ... */ opacity: 0; transition: opacity 0.3s ease-in-out; }
-        .popup-fade-wrapper.fade-in { /* ... */ opacity: 1; }
-
+        .popup-fade-wrapper{opacity:0;transition:opacity .3s ease-in-out}.popup-fade-wrapper.fade-in{opacity:1}
     </style>
 </head>
 <body>
@@ -115,102 +48,148 @@
             <button id="startButton">Start Auto</button>
             <button id="stopButton">Stop Auto</button>
             <button id="triggerNowButton">Trigger Now</button>
-            <button id="creditsButton">Credits</button> <div class="volume-control">
-                 <label for="volumeSlider">Volume:</label>
-                 <input type="range" id="volumeSlider" min="0" max="100" value="70">
+            <button id="creditsButton">Credits</button>
+            <div class="volume-control">
+                <label for="volumeSlider">Volume:</label>
+                <input type="range" id="volumeSlider" min="0" max="100" value="70">
             </div>
         </div>
         <div class="delay-control">
-             <div class="input-group">
-                <label for="minDelayInput">Min Delay (s):</label>
-                <input type="number" id="minDelayInput" min="1" value="10">
-             </div>
-             <div class="input-group">
-                 <label for="maxDelayInput">Max Delay (s):</label>
-                 <input type="number" id="maxDelayInput" min="1" value="20">
-             </div>
+             <div class="input-group"><label for="minDelayInput">Min Delay (s):</label><input type="number" id="minDelayInput" min="1" value="10"></div>
+             <div class="input-group"><label for="maxDelayInput">Max Delay (s):</label><input type="number" id="maxDelayInput" min="1" value="20"></div>
+        </div>
+        <div class="barrage-control">
+             <fieldset id="barrageFieldset"> <legend>Red Ball Barrage</legend>
+                 <input type="radio" id="barrageOff" name="barrageIntensity" value="0" checked><label for="barrageOff">Off</label>
+                 <input type="radio" id="barrageLow" name="barrageIntensity" value="1"><label for="barrageLow">Low</label>
+                 <input type="radio" id="barrageMedium" name="barrageIntensity" value="2"><label for="barrageMedium">Medium</label>
+                 <input type="radio" id="barrageHigh" name="barrageIntensity" value="3"><label for="barrageHigh">High</label>
+             </fieldset>
         </div>
     </div>
 
     <div class="modal-backdrop" id="modalBackdrop"></div>
-    <div id="creditsModal">
-        <button class="close-button" id="closeCreditsButton" title="Close">&times;</button>
-        <h2>Credits & Assets</h2>
-        <p>This page uses assets from various sources:</p>
-        <ul>
-            <li><strong>Sounds & Red Ball Image:</strong> From the GitHub repository by <a href="https://github.com/d3add3v" target="_blank" rel="noopener noreferrer">d3add3v</a>. See repo: <a href="https://github.com/d3add3v/RedBall" target="_blank" rel="noopener noreferrer">d3add3v/RedBall</a></li>
-            <li><strong>Original Red Teddy Concept:</strong> Inspired by Regretevator on Roblox.</li>
-            <li><strong>Group:</strong> Developed by REDACTED or just go to my github :).</li>
-        </ul>
-        <p>Please respect the original creators and sources.</p>
-        <p><em>Mika 4 life!1!1!111!</em></p>
-    </div>
+    <div id="creditsModal"> <button class="close-button" id="closeCreditsButton" title="Close">&times;</button> <h2>Credits & Assets</h2> <p>Sounds & Image: <a href="https://github.com/d3add3v/RedBall" target="_blank" rel="noopener noreferrer">d3add3v/RedBall</a></p><p>Concept: Regretevator</p><p>Developer: REDACTED just go to my github :)</p></div>
 
     <script>
-        // --- Configuration (Defaults) ---
-        const soundUrls = [ /* ... (same sound list) ... */ 'https://raw.githubusercontent.com/d3add3v/RedBall/main/Anvil1.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/Anvil2.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/Burn.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/Disgusted.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/Dont_touch_me.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/Excuse_Me.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/Fullofhate.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/I_Dont_Wanna_See_You.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/I_HATE_YOU.wav',"https://raw.githubusercontent.com/d3add3v/RedBall/main/Idon%27tlikeyou.wav",'https://raw.githubusercontent.com/d3add3v/RedBall/main/Ill.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/ImHateFilled.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/Jump_Off_Of_A_Microwave.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/Knuckle.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/Ovenon.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/Whats_In_Your_Pocket_What_Did_You_Just_Put_In_Your_Pocket.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/Who_Do_You_Think_You_Are.wav',"https://raw.githubusercontent.com/d3add3v/RedBall/main/YOU%27RE_A_LOSER.wav",'https://raw.githubusercontent.com/d3add3v/RedBall/main/You_Would_Tell_Me_If_You_Stole_Something_Right.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/Youre_mentally_ill.wav'];
+        // --- Config, State, Elements ---
+        const soundUrls = [ /* ... */ 'https://raw.githubusercontent.com/d3add3v/RedBall/main/Anvil1.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/Anvil2.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/Burn.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/Disgusted.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/Dont_touch_me.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/Excuse_Me.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/Fullofhate.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/I_Dont_Wanna_See_You.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/I_HATE_YOU.wav',"https://raw.githubusercontent.com/d3add3v/RedBall/main/Idon%27tlikeyou.wav",'https://raw.githubusercontent.com/d3add3v/RedBall/main/Ill.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/ImHateFilled.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/Jump_Off_Of_A_Microwave.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/Knuckle.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/Ovenon.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/Whats_In_Your_Pocket_What_Did_You_Just_Put_In_Your_Pocket.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/Who_Do_You_Think_You_Are.wav',"https://raw.githubusercontent.com/d3add3v/RedBall/main/YOU%27RE_A_LOSER.wav",'https://raw.githubusercontent.com/d3add3v/RedBall/main/You_Would_Tell_Me_If_You_Stole_Something_Right.wav','https://raw.githubusercontent.com/d3add3v/RedBall/main/Youre_mentally_ill.wav'];
         const imageUrl = 'https://raw.githubusercontent.com/d3add3v/RedBall/main/lz10oedx6feb1.png';
-        const DEFAULT_MIN_DELAY_S = 10;
-        const DEFAULT_MAX_DELAY_S = 20;
+        const DEFAULT_MIN_DELAY_S = 10; const DEFAULT_MAX_DELAY_S = 20;
+        const BARRAGE_DELAYS = { 1: { min: 500, max: 1000 }, 2: { min: 250, max: 500 }, 3: { min: 100, max: 250 } };
         const FADE_DURATION_MS = 300;
 
-        // --- State Variables ---
-        let popupWindow = null;
-        let timeoutId = null;
-        let isRunning = false;
-        let currentVolume = 0.7;
+        let popupWindow = null; let timeoutId = null; let isRunning = false; let currentVolume = 0.7;
+        let barrageIntensityLevel = 0;
 
-        // --- Get DOM Elements ---
         const startButton = document.getElementById('startButton');
         const stopButton = document.getElementById('stopButton');
         const triggerNowButton = document.getElementById('triggerNowButton');
         const volumeSlider = document.getElementById('volumeSlider');
-        const minDelayInput = document.getElementById('minDelayInput'); // NEW
-        const maxDelayInput = document.getElementById('maxDelayInput'); // NEW
-        const creditsButton = document.getElementById('creditsButton'); // NEW
-        const creditsModal = document.getElementById('creditsModal');   // NEW
-        const closeCreditsButton = document.getElementById('closeCreditsButton'); // NEW
-        const modalBackdrop = document.getElementById('modalBackdrop');     // NEW
+        const minDelayInput = document.getElementById('minDelayInput');
+        const maxDelayInput = document.getElementById('maxDelayInput');
+        const creditsButton = document.getElementById('creditsButton');
+        const creditsModal = document.getElementById('creditsModal');
+        const closeCreditsButton = document.getElementById('closeCreditsButton');
+        const modalBackdrop = document.getElementById('modalBackdrop');
+        // Barrage fieldset no longer needed here as we don't disable it
+        const barrageRadioButtons = document.querySelectorAll('input[name="barrageIntensity"]');
 
-        // --- Core Function to Create and Show ONE Popup (Unchanged from previous) ---
-        function createAndShowPopup(soundUrlToPlay) { /* ... (Exact same logic as previous version) ... */
+        // --- NEW: Helper function to start fade-in and audio ---
+        function finalizePopupSetup(popupWin, fadeWrapper, audio) {
+            if (!popupWin || popupWin.closed || !fadeWrapper || !audio) return;
+            try {
+                 // Trigger fade-in *after* potential resize/move (using timeout for browser rendering)
+                setTimeout(() => {
+                    if (fadeWrapper) fadeWrapper.classList.add('fade-in');
+                    console.log("Fade-in triggered.");
+
+                    // Play audio *after* fade starts
+                    console.log("Attempting audio play...");
+                    let playPromise = audio.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(error => {
+                            console.warn("Audio play() failed:", error);
+                            // Don't set audioErrorOccurred here, let the main error handler do it
+                            if (popupWin && !popupWin.closed) popupWin.close();
+                        });
+                    }
+                }, 50); // Short delay
+            } catch (e) {
+                 console.error("Error during finalizePopupSetup:", e);
+                 if (popupWin && !popupWin.closed) popupWin.close();
+            }
+        }
+
+
+        // --- Core Function to Create and Show ONE Popup (UPDATED for Barrage randomness) ---
+        function createAndShowPopup(soundUrlToPlay) {
             console.log("createAndShowPopup called");
-             if (popupWindow && !popupWindow.closed) { popupWindow.close(); }
-             const initialPopupWidth = 600; const initialPopupHeight = 450;
-             const left = Math.round((screen.width / 2) - (initialPopupWidth / 2)); const top = Math.round((screen.height / 2) - (initialPopupHeight / 2));
-             const windowFeatures = `width=${initialPopupWidth},height=${initialPopupHeight},left=${left},top=${top},resizable=yes,scrollbars=no`;
-             try {
+            const isBarragePopup = barrageIntensityLevel > 0 && isRunning; // Check if Barrage mode is active
+
+            if (popupWindow && !popupWindow.closed) { popupWindow.close(); } // Close previous immediately
+
+            let initialPopupWidth, initialPopupHeight, left, top, windowFeatures;
+
+            if (isBarragePopup) {
+                // Barrage Mode: Random size and position
+                console.log("Barrage Mode: Generating random position/size.");
+                const minW = 300, maxW = 700, minH = 200, maxH = 600;
+                initialPopupWidth = Math.floor(Math.random() * (maxW - minW + 1)) + minW;
+                initialPopupHeight = Math.floor(Math.random() * (maxH - minH + 1)) + minH;
+                // Ensure position allows window to be fully on screen
+                left = Math.floor(Math.random() * (screen.width - initialPopupWidth));
+                top = Math.floor(Math.random() * (screen.height - initialPopupHeight));
+                // Ensure top/left are not negative (can happen with multi-monitor setups sometimes)
+                left = Math.max(0, left);
+                top = Math.max(0, top);
+                windowFeatures = `width=${initialPopupWidth},height=${initialPopupHeight},left=${left},top=${top},resizable=yes,scrollbars=no`;
+            } else {
+                // Normal Mode: Centered, fixed initial size
+                initialPopupWidth = 600; initialPopupHeight = 450;
+                left = Math.round((screen.width / 2) - (initialPopupWidth / 2));
+                top = Math.round((screen.height / 2) - (initialPopupHeight / 2));
+                windowFeatures = `width=${initialPopupWidth},height=${initialPopupHeight},left=${left},top=${top},resizable=yes,scrollbars=no`;
+            }
+
+            // Open window
+             try { /* ... (same window opening logic, check for blocking) ... */
                  popupWindow = window.open('about:blank', 'RedBallPopup', windowFeatures);
-                 if (!popupWindow || popupWindow.closed || typeof popupWindow.closed == 'undefined') { console.warn("Popup blocked/failed."); alert("Popup blocked!"); return; }
-                 console.log("New window opened.");
-             } catch (e) { console.error("Error opening window:", e); alert("Could not open popup."); return; }
+                 if (!popupWindow || popupWindow.closed || typeof popupWindow.closed == 'undefined') { console.warn("Popup blocked/failed."); if (!isBarragePopup && !isRunning) alert("Popup blocked!"); return false; }
+                 console.log("New window opened.", isBarragePopup ? "(Barrage)" : "(Normal)");
+             } catch (e) { console.error("Error opening window:", e); alert("Could not open popup."); return false; }
+
+             // Inject content, setup audio, image load, fade, close
              try {
-                if (!popupWindow.document) { console.error("No popup document."); if (!popupWindow.closed) popupWindow.close(); return; }
+                 if (!popupWindow.document) { /* ... */ return false; }
+                 // Inject same HTML as before
                  popupWindow.document.write(`<!DOCTYPE html><html><head><title>...</title><style>html, body { margin: 0; padding: 0; overflow: hidden; background-color: black; height: 100%; } #fadeWrapper { display: flex; justify-content: center; align-items: center; height: 100%; opacity: 0; transition: opacity ${FADE_DURATION_MS}ms ease-in-out; } #fadeWrapper.fade-in { opacity: 1; } img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; }</style></head><body><div id="fadeWrapper"><img id="popupImage" src="${imageUrl}" alt="Red Ball"></div></body></html>`);
                  popupWindow.document.close(); console.log("Content injected.");
-                 const fadeWrapper = popupWindow.document.getElementById('fadeWrapper'); const imageElement = popupWindow.document.getElementById('popupImage');
-                 if (!fadeWrapper || !imageElement) { console.error("Injected elements not found."); if (!popupWindow.closed) popupWindow.close(); return; }
+
+                 const fadeWrapper = popupWindow.document.getElementById('fadeWrapper');
+                 const imageElement = popupWindow.document.getElementById('popupImage');
+                 if (!fadeWrapper || !imageElement) { /* ... */ return false; }
+
                  const audio = new Audio(soundUrlToPlay); audio.preload = 'auto'; audio.volume = currentVolume; let audioErrorOccurred = false;
                  audio.addEventListener('error', (e) => { console.error("Audio error:", e); audioErrorOccurred = true; if (popupWindow && !popupWindow.closed) popupWindow.close(); });
+
                  imageElement.onload = () => {
                      console.log("Popup image loaded.");
-                     try {
-                         const imgWidth = imageElement.naturalWidth; const imgHeight = imageElement.naturalHeight; const paddingWidth = 20; const paddingHeight = 60;
-                         const targetWidth = imgWidth + paddingWidth; const targetHeight = imgHeight + paddingHeight;
-                         popupWindow.resizeTo(targetWidth, targetHeight);
-                         const newLeft = Math.round((screen.width / 2) - (targetWidth / 2)); const newTop = Math.round((screen.height / 2) - (targetHeight / 2));
-                         popupWindow.moveTo(newLeft, newTop); console.log(`Resized/Moved window`);
-                         setTimeout(() => {
-                             if (fadeWrapper) fadeWrapper.classList.add('fade-in'); console.log("Fade-in triggered.");
-                             console.log("Attempting audio play...");
-                             let playPromise = audio.play(); if (playPromise !== undefined) { playPromise.catch(error => { console.warn("Audio play failed:", error); audioErrorOccurred = true; if (popupWindow && !popupWindow.closed) popupWindow.close(); }); }
-                         }, 50);
-                     } catch (resizeOrMoveError) {
-                         console.warn("Resize/move error:", resizeOrMoveError);
-                         setTimeout(() => { if (fadeWrapper) fadeWrapper.classList.add('fade-in'); audio.play().catch(e => { console.warn("Audio play failed:", e); if (popupWindow && !popupWindow.closed) popupWindow.close(); }); }, 50);
+                     if (!isBarragePopup) { // Normal mode: Resize and move first
+                         try {
+                             const imgWidth = imageElement.naturalWidth; const imgHeight = imageElement.naturalHeight; const paddingWidth = 20; const paddingHeight = 60;
+                             const targetWidth = imgWidth + paddingWidth; const targetHeight = imgHeight + paddingHeight;
+                             popupWindow.resizeTo(targetWidth, targetHeight);
+                             const newLeft = Math.round((screen.width / 2) - (targetWidth / 2)); const newTop = Math.round((screen.height / 2) - (targetHeight / 2));
+                             popupWindow.moveTo(newLeft, newTop); console.log(`Resized/Moved window`);
+                         } catch (resizeOrMoveError) { console.warn("Resize/move error:", resizeOrMoveError); }
                      }
+                     // Call finalize for both modes (handles fade-in & audio start)
+                     finalizePopupSetup(popupWindow, fadeWrapper, audio);
                  };
                  imageElement.onerror = () => { console.error("Image load failed."); if (popupWindow && !popupWindow.closed) popupWindow.close(); };
+
+                 // Setup fade-out and close when audio ends (same for both modes)
                  audio.onended = () => {
                      console.log("Audio finished."); if (audioErrorOccurred) return;
                      if (popupWindow && !popupWindow.closed && fadeWrapper) {
@@ -218,98 +197,60 @@
                          setTimeout(() => { if (popupWindow && !popupWindow.closed) { popupWindow.close(); console.log("Closed window after fade."); } }, FADE_DURATION_MS + 50);
                      }
                  };
-             } catch (e) { console.error("Popup setup error:", e); if (popupWindow && !popupWindow.closed) popupWindow.close(); }
+             } catch (e) { console.error("Popup setup error:", e); if (popupWindow && !popupWindow.closed) popupWindow.close(); return false; }
+             return true; // Indicate success
         } // End createAndShowPopup
 
-        // --- Function for the Automatic Timer Loop (Unchanged) ---
-        function triggerPopupLogic() { /* ... (Exact same logic as previous version) ... */
-            if (!isRunning) { console.log("triggerPopupLogic skipped: not running."); return; }
-            console.log("Automatic trigger initiated.");
-            const randomIndex = Math.floor(Math.random() * soundUrls.length);
-            createAndShowPopup(soundUrls[randomIndex]);
-            if (isRunning) { scheduleNextPopup(); } // Reschedule *immediately* after starting one
-         }
+        // --- Automatic Timer Loop Trigger (Unchanged) ---
+        function triggerPopupLogic() { /* ... */ if (!isRunning) return; console.log("Automatic trigger initiated."); const randomIndex = Math.floor(Math.random() * soundUrls.length); createAndShowPopup(soundUrls[randomIndex]); if (isRunning) scheduleNextPopup(); }
 
-        // --- Scheduling Function (UPDATED to use inputs) ---
-        function scheduleNextPopup() {
-            if (!isRunning) return;
-            if (timeoutId) clearTimeout(timeoutId);
-
-            // Read delay values from input fields
-            let minDelay = parseFloat(minDelayInput.value);
-            let maxDelay = parseFloat(maxDelayInput.value);
-
-            // Validation
-            if (isNaN(minDelay) || minDelay < 1) {
-                 minDelay = DEFAULT_MIN_DELAY_S;
-                 console.warn(`Invalid min delay, using default: ${minDelay}s`);
-                 minDelayInput.value = minDelay; // Correct input field
-            }
-            if (isNaN(maxDelay) || maxDelay < minDelay) { // Ensure max >= min
-                 maxDelay = Math.max(minDelay, DEFAULT_MAX_DELAY_S); // Use larger of min or default max
-                 console.warn(`Invalid max delay (must be >= min), using: ${maxDelay}s`);
-                 maxDelayInput.value = maxDelay; // Correct input field
-            }
-
-            const delayMs = Math.random() * (maxDelay - minDelay) * 1000 + (minDelay * 1000);
-            console.log(`Scheduling next automatic popup in ${(delayMs / 1000).toFixed(1)}s (Min: ${minDelay}s, Max: ${maxDelay}s).`);
-            timeoutId = setTimeout(triggerPopupLogic, delayMs);
+        // --- Scheduling Function (Handles Barrage Intensity Delay - Unchanged) ---
+        function scheduleNextPopup() { /* ... (Exact same logic as previous version) ... */
+             if (!isRunning) return; if (timeoutId) clearTimeout(timeoutId); let delayMs; let logMsg; const currentIntensity = barrageIntensityLevel;
+             if (currentIntensity > 0) { const delays = BARRAGE_DELAYS[currentIntensity]; if (delays) { delayMs = Math.random() * (delays.max - delays.min) + delays.min; const intensityName = ["","Low","Medium","High"][currentIntensity]; logMsg = `Scheduling BARRAGE [${intensityName}] popup in ${(delayMs / 1000).toFixed(3)}s.`; } else { currentIntensity = 0; console.warn("Invalid Barrage Intensity"); } }
+             if (currentIntensity === 0) { let minDelay = parseFloat(minDelayInput.value); let maxDelay = parseFloat(maxDelayInput.value); if (isNaN(minDelay) || minDelay < 1) { minDelay = DEFAULT_MIN_DELAY_S; minDelayInput.value = minDelay; } if (isNaN(maxDelay) || maxDelay < minDelay) { maxDelay = Math.max(minDelay, DEFAULT_MAX_DELAY_S); maxDelayInput.value = maxDelay; } delayMs = Math.random() * (maxDelay - minDelay) * 1000 + (minDelay * 1000); logMsg = `Scheduling next popup in ${(delayMs / 1000).toFixed(1)}s (Min: ${minDelay}s, Max: ${maxDelay}s).`; }
+             console.log(logMsg); timeoutId = setTimeout(triggerPopupLogic, delayMs);
         }
 
-         // --- Control Functions (Unchanged) ---
-         function startPopups() { /* ... (same as before) ... */
-             if (isRunning) return; isRunning = true; console.log("Starting popups...");
-             startButton.disabled = true; stopButton.disabled = false; triggerNowButton.disabled = false;
-             scheduleNextPopup();
-         }
-         function stopPopups() { /* ... (same as before) ... */
+         // --- Control Functions (Stop resets Barrage radio) ---
+         function startPopups() { /* ... */ if (isRunning) return; isRunning = true; console.log("Starting popups..."); startButton.disabled = true; stopButton.disabled = false; triggerNowButton.disabled = false; /* barrageFieldset.disabled = false; NO LONGER NEEDED */ scheduleNextPopup(); }
+         function stopPopups() { /* ... */
              if (!isRunning) return; isRunning = false; if (timeoutId) { clearTimeout(timeoutId); timeoutId = null; console.log("Cancelled schedule."); }
+             barrageIntensityLevel = 0; document.getElementById('barrageOff').checked = true; // Reset radio
+             /* barrageFieldset.disabled = true; NO LONGER NEEDED */
              if (popupWindow && !popupWindow.closed) { console.log("Closing popup on stop."); try { const currentAudio = popupWindow.document?.querySelector('audio'); if (currentAudio) { currentAudio.pause(); currentAudio.src = ""; } } catch (e) {} popupWindow.close(); }
-             console.log("Stopped popups."); startButton.disabled = false; stopButton.disabled = true; triggerNowButton.disabled = false;
+             console.log("Stopped popups. Barrage mode OFF."); startButton.disabled = false; stopButton.disabled = true; triggerNowButton.disabled = false;
          }
 
          // --- Manual Trigger Function (Unchanged) ---
-         function triggerManualPopup() { /* ... (same as before) ... */
-              console.log("Manual trigger."); if (!popupWindow || popupWindow.closed) { const randomIndex = Math.floor(Math.random() * soundUrls.length); createAndShowPopup(soundUrls[randomIndex]); } else { console.log("Skipped manual trigger: popup active."); /* popupWindow.focus(); */ }
-         }
+         function triggerManualPopup() { /* ... */ console.log("Manual trigger."); if (!popupWindow || popupWindow.closed) { const randomIndex = Math.floor(Math.random() * soundUrls.length); createAndShowPopup(soundUrls[randomIndex]); } else { console.log("Skipped manual trigger: popup active."); } }
 
-         // --- NEW Modal Control Functions ---
-         function openCreditsModal() {
-             console.log("Opening credits modal.");
-             document.body.classList.add('modal-open');
-         }
-         function closeCreditsModal() {
-              console.log("Closing credits modal.");
-              document.body.classList.remove('modal-open');
-         }
+         // --- Modal Control Functions (Unchanged) ---
+         function openCreditsModal() { /* ... */ console.log("Opening credits."); document.body.classList.add('modal-open'); }
+         function closeCreditsModal() { /* ... */ console.log("Closing credits."); document.body.classList.remove('modal-open'); }
 
-
-         // --- Event Listeners ---
-         startButton.addEventListener('click', startPopups);
-         stopButton.addEventListener('click', stopPopups);
-         triggerNowButton.addEventListener('click', triggerManualPopup);
-         volumeSlider.addEventListener('input', (event) => {
-             currentVolume = parseFloat(event.target.value) / 100;
-             console.log("Volume changed:", currentVolume);
+         // --- Event Listeners (Barrage listener unchanged) ---
+         startButton.addEventListener('click', startPopups); stopButton.addEventListener('click', stopPopups); triggerNowButton.addEventListener('click', triggerManualPopup);
+         volumeSlider.addEventListener('input', (event) => { currentVolume = parseFloat(event.target.value) / 100; console.log("Volume:", currentVolume); });
+         creditsButton.addEventListener('click', openCreditsModal); closeCreditsButton.addEventListener('click', closeCreditsModal); modalBackdrop.addEventListener('click', closeCreditsModal);
+         barrageRadioButtons.forEach(radio => { /* ... (Exact same listener logic as previous version) ... */
+            radio.addEventListener('change', (event) => { const selectedLevel = parseInt(event.target.value); console.log(`Barrage selection changed to level: ${selectedLevel}`); if (selectedLevel > 0 && barrageIntensityLevel === 0) { const confirmBarrage = window.confirm( "ARE YOU SURE YOU WANT TO LAUNCH Red Ball Barrage?\n\n" + `This will set the intensity to ${["","Low","Medium","High"][selectedLevel]} and open popups rapidly, which could make your browser sluggish.\n`+ "It can be stopped using the 'Stop Auto' button.\n\n" + "[OK = Yes, Cancel = No]" ); if (confirmBarrage) { barrageIntensityLevel = selectedLevel; console.log(`Barrage mode ENABLED (Level: ${selectedLevel}).`); } else { barrageIntensityLevel = 0; document.getElementById('barrageOff').checked = true; console.log("Barrage mode cancelled."); } } else { barrageIntensityLevel = selectedLevel; if (selectedLevel === 0) { console.log("Barrage mode DISABLED."); } else { console.log(`Barrage intensity changed to level: ${selectedLevel}.`); } } });
          });
-         creditsButton.addEventListener('click', openCreditsModal);     // NEW
-         closeCreditsButton.addEventListener('click', closeCreditsModal); // NEW
-         modalBackdrop.addEventListener('click', closeCreditsModal); // Close modal if backdrop clicked
 
         // --- Initial State Setup ---
         function initialize() {
             console.log("Initializing...");
-            currentVolume = parseFloat(volumeSlider.value) / 100; // Initial volume
-            minDelayInput.value = DEFAULT_MIN_DELAY_S; // Set initial delay input values
-            maxDelayInput.value = DEFAULT_MAX_DELAY_S;
+            currentVolume = parseFloat(volumeSlider.value) / 100;
+            minDelayInput.value = DEFAULT_MIN_DELAY_S; maxDelayInput.value = DEFAULT_MAX_DELAY_S;
+            barrageIntensityLevel = 0; document.getElementById('barrageOff').checked = true;
+            // barrageFieldset.disabled = true; // NO LONGER disabling controls initially
             startButton.disabled = false; stopButton.disabled = true; triggerNowButton.disabled = false;
             console.log("Page loaded. Auto-starting popups in 3 seconds...");
             setTimeout(startPopups, 3000);
         }
 
         // DOM Ready check
-        if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initialize); }
-        else { initialize(); }
+        if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initialize); } else { initialize(); }
 
     </script>
 
